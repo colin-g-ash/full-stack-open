@@ -44,12 +44,7 @@ const App = () => {
       <Button handleClick={handleNeutralClick} text="neutral" />
       <Button handleClick={handleBadClick} text="bad" />
       <Header text="statistics"/>
-      <Tallies text="good" tally={good}/>
-      <Tallies text="neutral" tally={neutral}/>
-      <Tallies text="bad" tally={bad}/>
-      <Tallies text="total" tally={total}/>
-      <Tallies text="average" tally={average}/>
-      <Tallies text="postive" tally={positive}/>
+      <Statistics text="No feedback given" good={good} bad={bad} neutral={neutral} positive={positive} total={total} average={average}/>
     </div>
   )
 }
@@ -62,6 +57,35 @@ const Button = ({ handleClick, text }) => (
   </button>
 )
 
-const Tallies = (props) => <p>{props.text} {props.tally}</p>
+const Statistics = (props) => {
+  console.log(props) 
+  if (props.total != 0) return (
+    <div>
+      <table>
+        <tbody>
+            <StatisticsLine text="good" tally={props.good}/>
+            <StatisticsLine text="neutral" tally={props.neutral}/>
+            <StatisticsLine text="bad" tally={props.bad}/>
+            <StatisticsLine text="all" tally={props.total}/>
+            <StatisticsLine text="average" tally={props.average}/>
+            <StatisticsLine text="postive" tally={props.positive}/>
+        </tbody>
+      </table> 
+    </div>
+  )
+  return (
+    <div>{props.text}</div>
+  )
+}
+
+const StatisticsLine = (props) => {
+  return(
+    <tr>
+      <td>{props.text}</td>
+      <td>{props.tally}</td>
+    </tr>
+  ) 
+}
+
 
 export default App
